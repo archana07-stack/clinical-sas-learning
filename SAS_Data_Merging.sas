@@ -1,0 +1,47 @@
+/* Dataset 1: Patient details */
+
+DATA PATIENTS;
+INPUT ID NAME $ AGE;
+DATALINES;
+101 RAM 25
+102 SITA 30
+103 JOHN 22
+104 PRIYA 28
+;
+RUN;
+
+/* Dataset 2: Treatment details */
+
+DATA TREATMENT;
+INPUT ID DRUG $ DOSE;
+DATALINES;
+101 ASPIRIN 100
+102 METFORMIN 500
+103 PARACETAMOL 500
+104 AMOXICILLIN 250
+;
+RUN;
+
+/* Sort first dataset */
+
+PROC SORT DATA=PATIENTS;
+BY ID;
+RUN;
+
+/* Sort second dataset */
+
+PROC SORT DATA=TREATMENT;
+BY ID;
+RUN;
+
+/* Merge both datasets */
+
+DATA MERGED_DATA;
+MERGE PATIENTS TREATMENT;
+BY ID;
+RUN;
+
+/* Display merged dataset */
+
+PROC PRINT DATA=MERGED_DATA;
+RUN;
